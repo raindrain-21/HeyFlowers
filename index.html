@@ -11,7 +11,9 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #121212;
+            background-color: #121212; /* Solid dark background */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 15px 15px; /* Subtle dotted pattern for texture */
             font-family: Arial, sans-serif;
             color: #f1f1f1;
             overflow: hidden;
@@ -21,6 +23,9 @@
             text-align: center;
             z-index: 1;
         }
+        .welcome-text, .small-text {
+            text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Soft shadow for text */
+        }
         .welcome-text {
             font-size: 3rem;
             opacity: 0;
@@ -28,7 +33,7 @@
             animation: fadeIn 2s ease-in-out forwards, smoothFloat 6s ease-in-out infinite;
         }
         .small-text {
-            font-size: 1.5rem; /* Smaller font size for the second and third lines */
+            font-size: 1.5rem;
             opacity: 0;
             transform: translateY(-20px);
             animation: fadeIn 2s ease-in-out forwards, smoothFloat 6s ease-in-out infinite;
@@ -43,27 +48,40 @@
         }
         .star {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background: rgba(0, 128, 128, 0.5); /* Teal */
+            width: 7px;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             animation: twinkle 2s infinite, floatStar 10s ease-in-out infinite;
+            opacity: 0.8; /* Vary opacity for subtle effect */
         }
         .star:nth-child(even) {
-            background-color: rgba(255, 255, 102, 0.7); /* Light Yellow */
+            width: 5px;
+            height: 5px;
+            background-color: rgba(255, 255, 204, 0.7); /* Light Yellow */
         }
         @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
+            0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
         @keyframes floatStar {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
-        .scroll-indicator {
-            position: absolute;
-            bottom: 20px;
-            font-size: 1.2rem;
+        .next-button {
+            margin-top: 60px;
+            padding: 10px 20px;
+            background-color: #f1f1f1;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            animation: fadeIn 3s ease-in-out forwards;
+            box-shadow: 0px 0px 10px rgba(241, 241, 241, 0.6); /* Glow effect */
+        }
+        .next-button:hover {
+            background-color: #ddd;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
@@ -72,7 +90,7 @@
         <div class="welcome-text" id="welcomeText">Hey, अंkita</div>
         <div class="small-text" id="smallText1">"तुझं हसणं खूप सुंदर आहे"</div>
         <div class="small-text" id="smallText2">तू माझ्यासाठी एक खास मैत्रीण आहेस.</div>
-        <div class="scroll-indicator">खाली स्क्रोल करा, तुमच्यासाठी काहीतरी आहे! </div>
+        <button class="next-button" onclick="window.location.href='first.html'">For You !</button>
     </div>
     <script>
         window.onload = function() {
@@ -83,7 +101,7 @@
             smallText1.style.animation = 'fadeIn 2s ease-in-out forwards';
             smallText2.style.animation = 'fadeIn 2s ease-in-out forwards';
 
-            // Create multiple teal and light yellow stars at random positions
+            // Create multiple stars at random positions
             for (let i = 0; i < 50; i++) {
                 let star = document.createElement('div');
                 star.className = 'star';
@@ -93,13 +111,6 @@
                 document.body.appendChild(star);
             }
         };
-
-        // Ensure smooth scroll and trigger redirection
-        window.addEventListener('wheel', function(event) {
-            if (event.deltaY > 0) {
-                window.location.href = 'first.html';
-            }
-        });
     </script>
 </body>
 </html>
